@@ -3,263 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon journal du développement durable</title>
+    <title>Info Togo</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --color-primary: #163C6B; /* Deep Blue from the logo */
+            --color-secondary: #0096FF; /* Bright Blue from the logo */
+            --color-text: #303030;
+            --color-bg-light: #F8F9FA;
+            --color-bg-card: #FFFFFF;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0fdf4;
-            color: #166534;
+            background-color: var(--color-bg-light);
+            color: var(--color-text);
         }
-        .text-green-900 {
-            color: #166534;
+        .header-bg {
+            background-color: var(--color-bg-card);
+            border-bottom: 2px solid #ddd;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--color-secondary);
+        }
+        .section-title {
+            border-left: 5px solid var(--color-primary);
+            padding-left: 1rem;
+        }
+        .card {
+            background-color: var(--color-bg-card);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-blue {
+            background-color: var(--color-primary);
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+        .btn-blue:hover {
+            background-color: #123158;
+        }
+        .footer-bg {
+            background-color: var(--color-primary);
+            color: #fff;
         }
     </style>
 </head>
-<body class="bg-gray-100 antialiased">
+<body>
 
-    <!-- En-tête de la page -->
-    <header class="bg-white shadow-lg py-4 fixed w-full top-0 z-10">
+    <!-- Header -->
+    <header class="header-bg py-4 fixed w-full z-10 top-0 rounded-b-lg shadow-md">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <h1 class="text-3xl font-bold text-green-900">ODD Media</h1>
-            <nav class="hidden md:flex space-x-8 text-lg font-semibold">
-                <a href="#accueil" class="hover:text-green-600 transition duration-300">Accueil</a>
-                <a href="#articles" class="hover:text-green-600 transition duration-300">Articles & Reportages</a>
-                <a href="#videos" class="hover:text-green-600 transition duration-300">Vidéos</a>
-                <a href="#partenaires" class="hover:text-green-600 transition duration-300">Entreprises engagées</a>
-                <a href="#outils" class="hover:text-green-600 transition duration-300">Outils Créateurs ✨</a>
+            <a href="#" class="flex items-center space-x-2">
+                <img src="https://placehold.co/64x64/F8F9FA/163C6B?text=Info+Togo" alt="Info Togo Logo" class="w-12 h-12 rounded-full">
+                <span class="text-3xl font-bold text-gray-800 hidden md:block">Info Togo</span>
+            </a>
+            <nav class="hidden md:flex space-x-8 text-lg font-medium">
+                <a href="#actualites" class="nav-link text-gray-700">Actualités</a>
+                <a href="#videos" class="nav-link text-gray-700">Vidéos</a>
+                <a href="#outils" class="nav-link text-gray-700">Outils Créateurs</a>
             </nav>
             <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-green-900 focus:outline-none">
+                <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Menu mobile -->
-    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-green-900 bg-opacity-95 text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-20 md:hidden">
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-20 md:hidden">
         <div class="flex justify-end p-6">
             <button id="close-menu-button" class="text-white focus:outline-none">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
-        <nav class="flex flex-col items-center space-y-6 text-2xl font-bold">
-            <a href="#accueil" class="hover:text-green-400 transition duration-300" onclick="hideMenu()">Accueil</a>
-            <a href="#articles" class="hover:text-green-400 transition duration-300" onclick="hideMenu()">Articles & Reportages</a>
-            <a href="#videos" class="hover:text-green-400 transition duration-300" onclick="hideMenu()">Vidéos</a>
-            <a href="#partenaires" class="hover:text-green-400 transition duration-300" onclick="hideMenu()">Entreprises engagées</a>
-            <a href="#outils" class="hover:text-green-400 transition duration-300" onclick="hideMenu()">Outils Créateurs ✨</a>
+        <nav class="flex flex-col items-center space-y-6 text-2xl font-bold mt-12">
+            <a href="#actualites" class="hover:text-blue-400" onclick="hideMenu()">Actualités</a>
+            <a href="#videos" class="hover:text-blue-400" onclick="hideMenu()">Vidéos</a>
+            <a href="#outils" class="hover:text-blue-400" onclick="hideMenu()">Outils Créateurs</a>
         </nav>
     </div>
 
-    <!-- Contenu principal -->
-    <main class="pt-24">
-        <!-- Section d'accueil -->
-        <section id="accueil" class="bg-green-100 py-20 min-h-screen flex items-center justify-center relative">
-            <div class="container mx-auto px-6 text-center z-10">
-                <h2 class="text-5xl md:text-6xl font-extrabold text-green-900 leading-tight mb-4">
-                    Explorez un avenir durable
-                </h2>
-                <p class="text-xl md:text-2xl text-green-800 font-medium mb-8 max-w-2xl mx-auto">
-                    Votre source d'actualités, de reportages et d'interviews sur les Objectifs de Développement Durable au Togo et au-delà.
-                </p>
-                <a href="#articles" class="bg-green-700 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-green-800 transition duration-300 transform hover:scale-105">
-                    Découvrez nos histoires
-                </a>
-            </div>
-            <!-- Illustration de fond -->
-            <div class="absolute bottom-0 right-0 opacity-10">
-                <!-- SVG d'une feuille stylisée pour le fond -->
-                <svg class="w-64 h-64 md:w-96 md:h-96" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5A5.5 5.5 0 017.5 3c2.24 0 4.27 1.48 5.5 3.59C14.23 4.48 16.26 3 18.5 3A5.5 5.5 0 0124 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" class="text-green-500 opacity-50"></path>
-                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5A5.5 5.5 0 017.5 3c2.24 0 4.27 1.48 5.5 3.59C14.23 4.48 16.26 3 18.5 3A5.5 5.5 0 0124 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" class="text-green-600"></path>
-                </svg>
-            </div>
-        </section>
-
-        <!-- Section Articles & Reportages -->
-        <section id="articles" class="py-20 px-6">
-            <div class="container mx-auto">
-                <h2 class="text-4xl font-extrabold text-center text-green-900 mb-12">
-                    Nos derniers articles
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <!-- Article 1 -->
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-                        <img src="https://placehold.co/600x400/bbf7d0/166534?text=Changement+Climatique" alt="Article sur le changement climatique" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold mb-2 text-green-800">Togo : Comment la jeunesse s'engage pour le climat</h3>
-                            <p class="text-gray-600 text-sm mb-4">12 septembre 2025</p>
-                            <p class="text-gray-700 leading-relaxed">
-                                Découvrez les initiatives locales, des startups aux associations, qui luttent contre les effets du changement climatique et promeuvent des solutions durables.
-                            </p>
-                            <a href="#" class="mt-4 inline-block text-green-700 font-semibold hover:underline">Lire la suite &rarr;</a>
-                        </div>
-                    </div>
-                    <!-- Article 2 -->
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-                        <img src="https://placehold.co/600x400/99f6e4/166534?text=Innovation+Agricole" alt="Article sur l'innovation agricole" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold mb-2 text-green-800">L'innovation au service de l'agriculture togolaise</h3>
-                            <p class="text-gray-600 text-sm mb-4">11 septembre 2025</p>
-                            <p class="text-gray-700 leading-relaxed">
-                                Des drones aux applications mobiles, de jeunes entrepreneurs réinventent l'agriculture pour garantir la sécurité alimentaire (ODD 2).
-                            </p>
-                            <a href="#" class="mt-4 inline-block text-green-700 font-semibold hover:underline">Lire la suite &rarr;</a>
-                        </div>
-                    </div>
-                    <!-- Article 3 -->
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-                        <img src="https://placehold.co/600x400/bfdbfe/166534?text=Entrepreneuriat+Social" alt="Article sur l'entrepreneuriat social" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold mb-2 text-green-800">Rencontre avec un entrepreneur social : l'accès à l'eau potable</h3>
-                            <p class="text-gray-600 text-sm mb-4">10 septembre 2025</p>
-                            <p class="text-gray-700 leading-relaxed">
-                                Interview exclusive avec le fondateur d'une startup qui propose des solutions innovantes pour l'assainissement et l'accès à l'eau potable.
-                            </p>
-                            <a href="#" class="mt-4 inline-block text-green-700 font-semibold hover:underline">Lire la suite &rarr;</a>
-                        </div>
-                    </div>
+    <!-- Main content -->
+    <main class="pt-24 pb-12">
+        
+        <!-- Section Actualités -->
+        <section id="actualites" class="container mx-auto px-6 mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 section-title">Actualités</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Article 1 : Environnement (ODD 12) -->
+                <div class="card p-6 rounded-md shadow-md">
+                    <img src="https://placehold.co/600x400/93c5fd/1e3a8a?text=Environnement" alt="Image de l'article sur l'environnement" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Les défis de la gestion des déchets au Togo</h3>
+                    <p class="text-sm text-gray-500 mb-4">12 septembre 2025</p>
+                    <p class="text-gray-600 mb-4">Un rapport d'experts met en lumière les progrès et les obstacles restants pour atteindre l'ODD 12 sur la consommation et la production durables...</p>
+                    <a href="#" class="text-sm text-blue-700 font-semibold hover:underline">Lire la suite &rarr;</a>
+                </div>
+                <!-- Article 2 : Agriculture (ODD 2) -->
+                <div class="card p-6 rounded-md shadow-md">
+                    <img src="https://placehold.co/600x400/bfdbfe/1e3a8a?text=Agriculture" alt="Image de l'article sur l'agriculture" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">L'agriculture togolaise se tourne vers le bio</h3>
+                    <p class="text-sm text-gray-500 mb-4">11 septembre 2025</p>
+                    <p class="text-gray-600 mb-4">Rencontre avec des agriculteurs pionniers qui adoptent des pratiques durables pour une production plus respectueuse de l'environnement...</p>
+                    <a href="#" class="text-sm text-blue-700 font-semibold hover:underline">Lire la suite &rarr;</a>
+                </div>
+                <!-- Article 3 : Éducation (ODD 4) -->
+                <div class="card p-6 rounded-md shadow-md">
+                    <img src="https://placehold.co/600x400/99f6e4/163C6B?text=Education" alt="Image de l'article sur l'éducation" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">L'éducation numérique pour tous, un pas vers l'ODD 4</h3>
+                    <p class="text-sm text-gray-500 mb-4">10 septembre 2025</p>
+                    <p class="text-gray-600 mb-4">Comment de nouvelles initiatives technologiques améliorent l'accès à l'éducation de qualité pour les jeunes dans les zones rurales...</p>
+                    <a href="#" class="text-sm text-blue-700 font-semibold hover:underline">Lire la suite &rarr;</a>
+                </div>
+                <!-- Article 4 : Politique  -->
+                <div class="card p-6 rounded-md shadow-md">
+                    <img src="https://placehold.co/600x400/bfdbfe/163C6B?text=Gouvernance" alt="Image de l'article sur la gouvernance" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Transparence et participation citoyenne : les clés de l'ODD 16</h3>
+                    <p class="text-sm text-gray-500 mb-4">9 septembre 2025</p>
+                    <p class="text-gray-600 mb-4">Un aperçu des réformes en cours pour renforcer les institutions et promouvoir la paix et la justice pour tous au Togo...</p>
+                    <a href="#" class="text-sm text-blue-700 font-semibold hover:underline">Lire la suite &rarr;</a>
+                </div>
+                <!-- Article 5 : Social et culture -->
+                <div class="card p-6 rounded-md shadow-md">
+                    <img src="https://placehold.co/600x400/99f6e4/163C6B?text=Sante" alt="Image de l'article sur la santé" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">L'accès universel aux soins : un combat pour l'ODD 3</h3>
+                    <p class="text-sm text-gray-500 mb-4">8 septembre 2025</p>
+                    <p class="text-gray-600 mb-4">Focus sur les initiatives qui visent à améliorer la santé et le bien-être de la population, en particulier dans les zones défavorisées...</p>
+                    <a href="#" class="text-sm text-blue-700 font-semibold hover:underline">Lire la suite &rarr;</a>
+                </div>
+                <!-- Article 6 : Economie -->
+                <div class="card p-6 rounded-md shadow-md">
+                    <img src="https://placehold.co/600x400/bfdbfe/163C6B?text=Egalite" alt="Image de l'article sur l'égalité" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">L'autonomisation des femmes : moteur de développement</h3>
+                    <p class="text-sm text-gray-500 mb-4">7 septembre 2025</p>
+                    <p class="text-gray-600 mb-4">Un reportage sur les programmes de formation qui aident les femmes à lancer leur propre entreprise pour une plus grande autonomie financière...</p>
+                    <a href="#" class="text-sm text-blue-700 font-semibold hover:underline">Lire la suite &rarr;</a>
+                </div>
+                <!-- Article 7 :  Innovation -->
+                <div class="card p-6 rounded-md shadow-md">
+                    <img src="https://placehold.co/600x400/93c5fd/1e3a8a?text=Villes+Durables" alt="Image de l'article sur les villes durables" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Lomé se modernise pour devenir une ville durable</h3>
+                    <p class="text-sm text-gray-500 mb-4">6 septembre 2025</p>
+                    <p class="text-gray-600 mb-4">Comment la capitale togolaise intègre l'urbanisme écologique, la gestion des transports et des infrastructures vertes...</p>
+                    <a href="#" class="text-sm text-blue-700 font-semibold hover:underline">Lire la suite &rarr;</a>
+                </div>
+                <!-- Article 8 : Autres Rubriques -->
+                <div class="card p-6 rounded-md shadow-md">
+                    <img src="https://placehold.co/600x400/bfdbfe/163C6B?text=Energie+Propre" alt="Image de l'article sur l'énergie propre" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">L'énergie solaire, solution pour les zones rurales isolées</h3>
+                    <p class="text-sm text-gray-500 mb-4">5 septembre 2025</p>
+                    <p class="text-gray-600 mb-4">Découvrez un projet qui vise à fournir un accès à l'électricité durable et abordable grâce à des mini-réseaux solaires...</p>
+                    <a href="#" class="text-sm text-blue-700 font-semibold hover:underline">Lire la suite &rarr;</a>
                 </div>
             </div>
         </section>
 
         <!-- Section Vidéos -->
-        <section id="videos" class="bg-green-100 py-20 px-6">
-            <div class="container mx-auto">
-                <h2 class="text-4xl font-extrabold text-center text-green-900 mb-12">
-                    Reportages vidéo
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <!-- Vidéo 1 -->
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-                        <div class="aspect-w-16 aspect-h-9">
-                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold mb-2 text-green-800">Au cœur du recyclage à Lomé</h3>
-                            <p class="text-gray-700 leading-relaxed">
-                                Plongez dans le quotidien des acteurs du recyclage de plastiques au Togo et découvrez leur impact sur l'environnement.
-                            </p>
-                        </div>
+        <section id="videos" class="container mx-auto px-6 mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 section-title">Vidéos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Vidéo 1 -->
+                <div class="card p-4 rounded-md shadow-md">
+                    <div class="aspect-w-16 aspect-h-9 mb-4">
+                        <iframe class="w-full h-full rounded-md" src="https://www.youtube.com/embed/P-hYx_2aX9k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
-                    <!-- Vidéo 2 -->
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-                        <div class="aspect-w-16 aspect-h-9">
-                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold mb-2 text-green-800">Énergie solaire : une solution pour les communautés rurales</h3>
-                            <p class="text-gray-700 leading-relaxed">
-                                Ce reportage met en lumière un projet d'électrification solaire qui transforme la vie d'un village isolé au nord du Togo.
-                            </p>
-                        </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Reportage : L'essor des énergies renouvelables</h3>
+                    <p class="text-gray-600">Un aperçu des projets d'énergie solaire qui transforment les communautés locales au Togo.</p>
+                </div>
+                <!-- Vidéo 2 -->
+                <div class="card p-4 rounded-md shadow-md">
+                    <div class="aspect-w-16 aspect-h-9 mb-4">
+                        <iframe class="w-full h-full rounded-md" src="https://www.youtube.com/embed/P-hYx_2aX9k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Interview : Un entrepreneur sur l'ODD 6</h3>
+                    <p class="text-gray-600">Rencontre avec un pionnier dans le domaine de l'assainissement et de l'accès à l'eau potable pour tous.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Section Outils Créateurs -->
-        <section id="outils" class="bg-green-100 py-20 px-6">
-            <div class="container mx-auto">
-                <h2 class="text-4xl font-extrabold text-center text-green-900 mb-12">
-                    Outils Créateurs ✨
-                </h2>
-                <p class="text-center text-lg text-green-800 mb-12 max-w-2xl mx-auto">
-                    Utilisez ces outils propulsés par l'IA pour vous aider dans votre création de contenu.
-                </p>
-
-                <div class="flex flex-col lg:flex-row gap-8">
-                    <!-- Générateur de titres -->
-                    <div class="bg-white rounded-xl shadow-lg p-8 flex-1">
-                        <h3 class="text-2xl font-bold text-green-800 mb-4">Générer des titres d'articles ✨</h3>
-                        <p class="text-gray-600 mb-4">Décrivez les points clés de votre article pour obtenir des suggestions de titres.</p>
-                        <textarea id="title-input" class="w-full p-4 border border-green-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 mb-4" rows="4" placeholder="Ex: Interview avec un agriculteur, méthodes durables, sécurité alimentaire, ODD 2"></textarea>
-                        <button id="generate-title-btn" class="w-full bg-green-700 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-green-800 transition duration-300 transform hover:scale-105">
-                            Générer des titres ✨
-                        </button>
-                        <div id="title-loading-indicator" class="hidden text-center mt-4 text-green-800 font-semibold">Chargement...</div>
-                        <div id="title-output" class="mt-6 p-4 bg-green-50 rounded-lg border-l-4 border-green-500 text-gray-700 space-y-2"></div>
-                    </div>
-
-                    <!-- Résumé d'articles -->
-                    <div class="bg-white rounded-xl shadow-lg p-8 flex-1">
-                        <h3 class="text-2xl font-bold text-green-800 mb-4">Résumer un article ✨</h3>
-                        <p class="text-gray-600 mb-4">Collez le texte d'un article long pour en obtenir un résumé concis.</p>
-                        <textarea id="summary-input" class="w-full p-4 border border-green-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 mb-4" rows="4" placeholder="Collez votre article ici..."></textarea>
-                        <button id="summarize-btn" class="w-full bg-green-700 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-green-800 transition duration-300 transform hover:scale-105">
-                            Résumer l'article ✨
-                        </button>
-                        <div id="summary-loading-indicator" class="hidden text-center mt-4 text-green-800 font-semibold">Chargement...</div>
-                        <div id="summary-output" class="mt-6 p-4 bg-green-50 rounded-lg border-l-4 border-green-500 text-gray-700 leading-relaxed"></div>
-                    </div>
+        <!-- Section Outils IA -->
+        <section id="outils" class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 section-title">Outils Créateurs</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+                <!-- Générateur de titres -->
+                <div class="card p-6 rounded-md shadow-md">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Générer des titres</h3>
+                    <p class="text-gray-600 mb-4">Décrivez votre article pour obtenir des titres percutants.</p>
+                    <textarea id="title-input" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 mb-4" rows="3" placeholder="Ex: Interview avec un agriculteur, méthodes durables, sécurité alimentaire, ODD 2"></textarea>
+                    <button id="generate-title-btn" class="w-full btn-blue font-bold py-2 rounded-md">Générer</button>
+                    <div id="title-loading-indicator" class="hidden text-center mt-4 text-blue-700 font-semibold">Chargement...</div>
+                    <div id="title-output" class="mt-4 p-2 bg-gray-100 rounded-md text-gray-700 text-sm"></div>
                 </div>
 
-                <!-- Générateur de post de promotion -->
-                <div class="bg-white rounded-xl shadow-lg p-8 mt-8">
-                    <h3 class="text-2xl font-bold text-green-800 mb-4">Rédiger un post de promotion ✨</h3>
-                    <p class="text-gray-600 mb-4">Décrivez les actions et produits d'une entreprise pour obtenir un texte promotionnel.</p>
-                    <textarea id="promo-input" class="w-full p-4 border border-green-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 mb-4" rows="4" placeholder="Ex: Entreprise 'EcoTech Togo', fabrique des poubelles intelligentes, solutions de gestion des déchets pour les villes."></textarea>
-                    <button id="generate-promo-btn" class="w-full bg-green-700 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-green-800 transition duration-300 transform hover:scale-105">
-                        Rédiger le post ✨
-                    </button>
-                    <div id="promo-loading-indicator" class="hidden text-center mt-4 text-green-800 font-semibold">Chargement...</div>
-                    <div id="promo-output" class="mt-6 p-4 bg-green-50 rounded-lg border-l-4 border-green-500 text-gray-700 leading-relaxed"></div>
+                <!-- Résumé d'articles -->
+                <div class="card p-6 rounded-md shadow-md">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Résumer un article</h3>
+                    <p class="text-gray-600 mb-4">Collez le texte pour en obtenir un résumé concis.</p>
+                    <textarea id="summary-input" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 mb-4" rows="3" placeholder="Collez votre article ici..."></textarea>
+                    <button id="summarize-btn" class="w-full btn-blue font-bold py-2 rounded-md">Résumer</button>
+                    <div id="summary-loading-indicator" class="hidden text-center mt-4 text-blue-700 font-semibold">Chargement...</div>
+                    <div id="summary-output" class="mt-4 p-2 bg-gray-100 rounded-md text-gray-700 text-sm"></div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Section Partenaires -->
-        <section id="partenaires" class="py-20 px-6">
-            <div class="container mx-auto">
-                <h2 class="text-4xl font-extrabold text-center text-green-900 mb-12">
-                    Entreprises partenaires
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-                    <!-- Entreprise 1 -->
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center transform transition duration-300 hover:scale-105">
-                        <img src="https://placehold.co/150x150/d1fae5/166534?text=Nom+de+l'entreprise+1" alt="Logo de l'entreprise 1" class="mx-auto rounded-full mb-4">
-                        <h3 class="text-xl font-bold text-green-800">Entreprise Verte SA</h3>
-                        <p class="text-gray-600 text-sm mt-2">Spécialiste de l'agriculture biologique et des solutions agro-écologiques.</p>
-                        <a href="#" class="mt-4 inline-block text-green-700 font-semibold hover:underline">Visiter leur site &rarr;</a>
-                    </div>
-                    <!-- Entreprise 2 -->
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center transform transition duration-300 hover:scale-105">
-                        <img src="https://placehold.co/150x150/d1fae5/166534?text=Nom+de+l'entreprise+2" alt="Logo de l'entreprise 2" class="mx-auto rounded-full mb-4">
-                        <h3 class="text-xl font-bold text-green-800">EcoTech Togo</h3>
-                        <p class="text-gray-600 text-sm mt-2">Développeur de solutions technologiques pour le recyclage et la gestion des déchets.</p>
-                        <a href="#" class="mt-4 inline-block text-green-700 font-semibold hover:underline">Visiter leur site &rarr;</a>
-                    </div>
-                    <!-- Entreprise 3 -->
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center transform transition duration-300 hover:scale-105">
-                        <img src="https://placehold.co/150x150/d1fae5/166534?text=Nom+de+l'entreprise+3" alt="Logo de l'entreprise 3" class="mx-auto rounded-full mb-4">
-                        <h3 class="text-xl font-bold text-green-800">Énergie Solaire Pro</h3>
-                        <p class="text-gray-600 text-sm mt-2">Fournisseur de kits et de systèmes solaires pour les particuliers et les entreprises.</p>
-                        <a href="#" class="mt-4 inline-block text-green-700 font-semibold hover:underline">Visiter leur site &rarr;</a>
-                    </div>
-                    <!-- Entreprise 4 -->
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center transform transition duration-300 hover:scale-105">
-                        <img src="https://placehold.co/150x150/d1fae5/166534?text=Nom+de+l'entreprise+4" alt="Logo de l'entreprise 4" class="mx-auto rounded-full mb-4">
-                        <h3 class="text-xl font-bold text-green-800">AquaClean Togo</h3>
-                        <p class="text-gray-600 text-sm mt-2">Spécialiste des systèmes de filtration d'eau et d'assainissement pour les communautés.</p>
-                        <a href="#" class="mt-4 inline-block text-green-700 font-semibold hover:underline">Visiter leur site &rarr;</a>
-                    </div>
+                <!-- Générateur de posts de promotion -->
+                <div class="card p-6 rounded-md shadow-md">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Rédiger un post de promotion</h3>
+                    <p class="text-gray-600 mb-4">Décrivez une entreprise pour un texte promotionnel.</p>
+                    <textarea id="promo-input" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 mb-4" rows="3" placeholder="Ex: 'EcoTech Togo', fabrique des poubelles intelligentes pour les villes."></textarea>
+                    <button id="generate-promo-btn" class="w-full btn-blue font-bold py-2 rounded-md">Rédiger</button>
+                    <div id="promo-loading-indicator" class="hidden text-center mt-4 text-blue-700 font-semibold">Chargement...</div>
+                    <div id="promo-output" class="mt-4 p-2 bg-gray-100 rounded-md text-gray-700 text-sm"></div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Pied de page -->
-    <footer class="bg-green-900 text-white py-10 mt-12">
+    <!-- Footer -->
+    <footer class="footer-bg py-6">
         <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2025 ODD Media. Tous droits réservés.</p>
-            <p class="mt-2 text-sm">Réalisé avec passion pour un avenir durable.</p>
+            <p>&copy; <span id="current-year"></span> Info Togo. Tous droits réservés.</p>
         </div>
     </footer>
 
     <script>
+        // JS pour le menu mobile
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const closeMenuButton = document.getElementById('close-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -276,7 +252,7 @@
             mobileMenu.classList.add('-translate-x-full');
         }
 
-        // Script pour les outils créateurs Gemini
+        // JS pour les outils créateurs Gemini
         const generateTitleBtn = document.getElementById('generate-title-btn');
         const summarizeBtn = document.getElementById('summarize-btn');
         const generatePromoBtn = document.getElementById('generate-promo-btn');
@@ -305,30 +281,44 @@
                 contents: [{ parts: [{ text: prompt }] }],
             };
 
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
+            let retryCount = 0;
+            const maxRetries = 3;
+            const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
+            while (retryCount < maxRetries) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        if (response.status === 429) { // Too many requests
+                            retryCount++;
+                            await delay(Math.pow(2, retryCount) * 1000);
+                            continue;
+                        }
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                    if (text) {
+                        outputElement.innerHTML = text.replace(/\n/g, '<br>');
+                    } else {
+                        outputElement.innerHTML = "Une erreur est survenue lors de la génération. Veuillez réessayer.";
+                    }
+                    break;
+
+                } catch (error) {
+                    console.error("Erreur lors de l'appel à l'API Gemini:", error);
+                    outputElement.innerHTML = "Une erreur est survenue lors de la connexion. Veuillez réessayer.";
+                    break;
+                } finally {
+                    loadingElement.classList.add('hidden');
                 }
-
-                const result = await response.json();
-                const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
-
-                if (text) {
-                    outputElement.innerHTML = text.replace(/\n/g, '<br>');
-                } else {
-                    outputElement.innerHTML = "Une erreur est survenue lors de la génération. Veuillez réessayer.";
-                }
-            } catch (error) {
-                console.error("Erreur lors de l'appel à l'API Gemini:", error);
-                outputElement.innerHTML = "Une erreur est survenue lors de la connexion. Veuillez réessayer.";
-            } finally {
-                loadingElement.classList.add('hidden');
             }
         }
 
@@ -364,6 +354,9 @@
                 promoOutput.innerHTML = "Veuillez décrire l'entreprise et ses actions.";
             }
         });
+
+        // Mise à jour de l'année du copyright
+        document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
